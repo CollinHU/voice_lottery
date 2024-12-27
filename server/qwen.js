@@ -21,8 +21,8 @@ module.exports = async function getChatCompletionAnswer(userContent) {
             messages: [
                 { role: "system", content: `You are a helpful assistant. 
                     if the user asks for lottery clearly, you should reply "lottery";
-                    if the user asks for end the lottery clearly, you should reply "lottery";
-                    if the user asks for end the re-lottery clearly, you should reply "relottery";
+                    if the user asks for stop or stop the lottery, you should reply "stop lottery";
+                    if the user asks for a re-lottery clearly or lottery again or lottery this prize again, you should reply "relottery";
                     if user hasn't decided or has other request, you can just reply "no action";
 
                     give your answer in json format containing field 'answer', for example {'answer': 'relottery'} if user gives a request of relotterying` },

@@ -13,3 +13,5 @@ error.json
 **/.env
 **/.vscode
 **/cache
+
+**/logo.png
