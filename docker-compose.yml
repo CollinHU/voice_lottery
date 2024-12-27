@@ -1,0 +1,17 @@
+version: '3.8'
+
+volumes:
+  lottery_log:
+
+services:
+  lottery:
+    container_name: lottery
+    expose:
+      - 8888
+    ports:
+      - "28458:8888"
+      - "443:443"
+    volumes:
+      - "lottery_log:/var/log"
+    image: "lottery:v4" 
+    restart: always
