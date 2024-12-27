@@ -92,6 +92,9 @@ export async function startSpeechRecognition() {
           }else if(user_llm_msg.llmAns === 'relottery'){
             const lotteryButton = document.getElementById('reLottery');
             lotteryButton.click();
+          }else if(user_llm_msg.llmAns === 'stop lottery'){
+            const lotteryButton = document.getElementById('stopLottery');
+            lotteryButton.click();
           }
       };
 

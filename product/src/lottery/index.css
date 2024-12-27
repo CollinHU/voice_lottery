@@ -75,16 +75,16 @@ a {
   top: 1.2vh;
   right: 0;
   width: 100%;
-  font-size: 2vh;
+  font-size: 1.5vh;
   color: rgba(127, 255, 255, 0.75);
 }
 
 .element .name {
   position: absolute;
-  top: 4.6vh;
+  top: 5.6vh;
   left: 0;
   right: 0;
-  font-size: 2.9vh;
+  font-size: 2vh;
   font-weight: bold;
   color: rgba(255, 255, 255, 0.75);
   text-shadow: 0 0 1vh rgba(0, 255, 255, 0.95);
@@ -97,6 +97,12 @@ a {
   right: 0;
   font-size: 1.6vh;
   color: rgba(127, 255, 255, 0.75);
+}
+.company-logo {
+  width: 15vw; /* 调整为更小的宽度 */
+  height: auto; /* 保持图片宽高比 */
+  margin-right: 4px; /* 减少间距以适应较小的图片 */
+  vertical-align: middle; /* 使图片与文本垂直居中对齐 */
 }
 
 button {
@@ -121,7 +127,7 @@ button:active {
 }
 
 .highlight {
-  background-color: rgba(253, 105, 0, 0.95) !important;
+  background-color: rgba(253, 0, 0, 0.95) !important;
   box-shadow: 0 0 12px rgba(253, 105, 0, 0.95);
   border: 1px solid rgba(253, 105, 0, 0.25);
 }
@@ -136,7 +142,7 @@ button:active {
 
 .prize.element {
   transition: background-color 1.5s ease-in 0.3s;
-  background-color: rgba(253, 105, 0, 0.85) !important;
+  background-color: rgba(253, 0, 0, 0.95) !important;
   box-shadow: 0 0 12px rgba(253, 105, 0, 0.95);
 }
 
@@ -466,7 +472,7 @@ button:active {
 }
 
 .prize-shine {
-  font-size: 5vh;
+  font-size: 3vh;
   font-weight: bold;
   color: #db5c58;
   vertical-align: middle;
@@ -514,7 +520,7 @@ button:active {
   font-size: 1.4vh;
   color: #fff;
   cursor: pointer;
-  background-color: rgba(253, 105, 0, 0.9);
+  background-color: rgba(253, 0, 0, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.5);
 }
 

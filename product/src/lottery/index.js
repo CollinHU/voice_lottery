@@ -214,7 +214,7 @@ function bindEvent() {
     // 如果正在抽奖，则禁止一切操作
     console.log('current event id',e.target.id)
     if (isLotting && e.target.id !== "voiceInteract") {
-      if (e.target.id === "lottery") {
+      if (e.target.id === "stopLottery") {
         rotateObj.stop();
         btns.lottery.innerHTML = "开始抽奖";
       } else{
@@ -303,7 +303,7 @@ function bindEvent() {
       case "voiceInteract":
         const voiceButton = e.target;
         isRecording = !isRecording;
-        voiceButton.innerHTML = isRecording? '停止说话': "开始说话";
+        voiceButton.innerHTML = isRecording? '停止对话': "开始对话";
         startSpeechRecognition();
         break;
     }

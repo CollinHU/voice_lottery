@@ -158,8 +158,32 @@ function showPrizeList(currentPrizeIndex) {
   if (currentPrize.type === defaultType) {
     currentPrize.count === "不限制";
   }
-  let htmlCode = `<div class="prize-mess">正在抽取<label id="prizeType" class="prize-shine">${currentPrize.text}</label><label id="prizeText" class="prize-shine">${currentPrize.title}</label>
-  <span style="display: none;">剩余<label id="prizeLeft" class="prize-shine">${currentPrize.count}</label>个</span></div><ul class="prize-list">`;
+  let htmlCode = `<div class="prize-mess">
+    <!-- 包装图片和文本 -->
+    <div class="prize-container">
+        <!-- 插入图片 -->
+         <img src="../img/logo.png" alt="奖品图标" class="company-logo" />
+        
+        <!-- 正在抽取的文本 -->
+        <div class="prize-text">
+            正在抽取
+            <label id="prizeType" class="prize-shine">${currentPrize.text}</label>
+            <label id="prizeText" class="prize-shine">${currentPrize.title}</label>
+        </div>
+    </div>
+    <span style="display: none;">
+        剩余
+        <label id="prizeLeft" class="prize-shine">${currentPrize.count}</label>个
+    </span>
+</div>
+<ul class="prize-list">`
+/* `<div class="prize-mess">
+  <img src="../img/logo.png" alt="奖品图标" class="company-logo" />
+  正在抽取<label id="prizeType" class="prize-shine">${currentPrize.text}</label>
+  <label id="prizeText" class="prize-shine">${currentPrize.title}</label>
+  <span style="display: none;">剩余<label id="prizeLeft" class="prize-shine">${currentPrize.count}</label>个</span>
+  </div>
+  <ul class="prize-list">`;*/
   prizes.forEach(item => {
     if (item.type === defaultType) {
       return true;
@@ -219,11 +243,11 @@ let setPrizeData = (function () {
     }
 
     if (!prizeElement.prizeType) {
-      console.log(prizeElement);
+      //console.log(prizeElement);
       prizeElement.prizeType = document.querySelector("#prizeType");
       prizeElement.prizeLeft = document.querySelector("#prizeLeft");
       prizeElement.prizeText = document.querySelector("#prizeText");
-      console.log(prizeElement.prizeText = document.querySelector("#prizeText"));
+      //console.log(prizeElement.prizeText = document.querySelector("#prizeText"));
     }
 
     if (isInit) {
@@ -261,7 +285,7 @@ let setPrizeData = (function () {
     let percent = (count / totalCount).toFixed(2);
     elements.bar && (elements.bar.style.width = percent * 100 + "%");
     elements.text && (elements.text.textContent = count + "/" + totalCount);
-    console.log(count, prizeElement);
+    //console.log(count, prizeElement);
     prizeElement.prizeLeft.textContent = count;
   };
 })();
