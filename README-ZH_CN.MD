@@ -49,6 +49,8 @@ npm install
 cd ../product
 npm install
 
+brew install ffmpeg
+
 # 打包
 npm run build
 
