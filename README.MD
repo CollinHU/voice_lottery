@@ -5,7 +5,7 @@ This repo is forked from https://github.com/moshang-ax/lottery/tree/master
 Annual dinner lottery program, 3D sphere raffle, support for configuration of prize information, import participants information by `Excel`, and export lottery results by `Excel`
 If programm is helpful for you😎😎😎, it will be greatful to comment us with⭐**star**⭐ 😘😘😘😍🥰🎉🎈🎃
 
-[点击跳转至中文使用文档](https://github.com/moshang-xc/lottery/blob/master/README-ZH_CN.MD)
+[点击跳转至中文使用文档](https://github.com/CollinHU/voice_lottery/blob/master/README-ZH_CN.MD)
 
 > Try it now:  [https://moshang-xc.github.io/lottery/](https://moshang-xc.github.io/lottery/)
 
@@ -39,7 +39,7 @@ Web Page: Three.js, References to the official 3D example of `Three.js`
 
 ## Install
 ```
-git clone https://github.com/moshang-xc/lottery.git
+git clone https://github.com/CollinHU/voice_lottery.git
 
 cd lottery
 

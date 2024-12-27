@@ -37,7 +37,7 @@ This repo is forked from https://github.com/moshang-ax/lottery/tree/master
 ## 安装
 
 ```
-git clone https://github.com/moshang-xc/lottery.git
+git clone https://github.com/CollinHU/voice_lottery.git
 
 cd lottery
 
