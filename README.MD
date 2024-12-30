@@ -37,6 +37,14 @@ Web Page: Three.js, References to the official 3D example of `Three.js`
 
 ![end.jpg](https://raw.githubusercontent.com/moshang-xc/blog/master/share/end.jpg)
 
+## Get AI Token
+参考 /server/.env.example 
+```
+cd /lottery/server
+mv .env.example .env
+//apply for token from AliCloud service
+```
+
 ## Install
 ```
 git clone https://github.com/CollinHU/voice_lottery.git
@@ -50,8 +58,6 @@ npm install
 # Front-end plugin installation
 cd ../product
 npm install
-
-brew install ffmpeg
 
 # Package
 npm run build

@@ -34,6 +34,14 @@ This repo is forked from https://github.com/moshang-ax/lottery/tree/master
 
 ![end.jpg](https://raw.githubusercontent.com/moshang-xc/blog/master/share/end.jpg)
 
+## 获取AI Token
+参考 /server/.env.example 
+```
+cd /lottery/server
+mv .env.example .env
+//从阿里云申请相关token
+```
+
 ## 安装
 
 ```
@@ -48,8 +56,6 @@ npm install
 # 前端插件安装
 cd ../product
 npm install
-
-brew install ffmpeg
 
 # 打包
 npm run build
