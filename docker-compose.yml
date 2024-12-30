@@ -9,7 +9,7 @@ services:
     expose:
       - 8888
     ports:
-      - "28458:8888"
+      - "8888:8888"
       - "443:443"
     volumes:
       - "lottery_log:/var/log"
