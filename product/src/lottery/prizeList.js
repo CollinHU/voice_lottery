@@ -177,13 +177,7 @@ function showPrizeList(currentPrizeIndex) {
     </span>
 </div>
 <ul class="prize-list">`
-/* `<div class="prize-mess">
-  <img src="../img/logo.png" alt="奖品图标" class="company-logo" />
-  正在抽取<label id="prizeType" class="prize-shine">${currentPrize.text}</label>
-  <label id="prizeText" class="prize-shine">${currentPrize.title}</label>
-  <span style="display: none;">剩余<label id="prizeLeft" class="prize-shine">${currentPrize.count}</label>个</span>
-  </div>
-  <ul class="prize-list">`;*/
+
   prizes.forEach(item => {
     if (item.type === defaultType) {
       return true;

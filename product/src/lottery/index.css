@@ -155,6 +155,21 @@ button:active {
   color: rgba(255, 255, 255, 0.85);
 }
 
+.voice-reg-img{
+  width: auto;
+  height: 20vh;
+}
+.voice-message{
+  position: absolute;
+  z-index: 10;
+  text-align: left;
+  color: gold;
+  top: 5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3vh;
+}
+
 .dan-mu {
   visibility: hidden;
   position: fixed;

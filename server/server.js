@@ -289,7 +289,10 @@ module.exports = {
           try {
               console.log("Send to LLM", result);
               // 等待 getChatCompletionAnswer 执行完毕并获取返回的结果
-              const llm_ans = await getChatCompletionAnswer(result);
+              let llm_ans =  ''
+              if(result !== ''){
+                llm_ans = await getChatCompletionAnswer(result);
+              }
   
               // 准备要发送的数据
               const res = { userMsg: result, llmAns: llm_ans };

@@ -90,6 +90,12 @@ export async function startSpeechRecognition() {
           // 开始录制
           mediaRecorder.start(200); // 每秒一次数据块
           console.log('MediaRecorder started.');
+          let htmlCode = `<div>
+                          <label id="voiceMessage" class="prize-shine">
+                          <img src="../img/voice_reg.gif" alt="Voice Registration GIF" class="voice-reg-img" />
+                          </label>
+                          </div>`;
+          document.querySelector("#voiceMessage").innerHTML = htmlCode;
       };
 
       socket.onerror = error => {
@@ -104,12 +110,18 @@ export async function startSpeechRecognition() {
           // 处理从服务器接收到的消息
           // console.log('Message from server:', message);
           const user_llm_msg = JSON.parse(message.data);
+          if (user_llm_msg.userMsg === ''){
+            user_llm_msg.userMsg = 'System: Invalid voice, please speak out your request again.';
+          }
+          else{
+            user_llm_msg.userMsg = 'User: ' + user_llm_msg.userMsg + '<br>' + 'System: ' + user_llm_msg.llmAns;
+          }
           mediaRecorder = null;
           // 关闭连接
           socket.close(1000, '用户主动关闭');
           // socket.removeEventListener('open');
           socket = null;
-          let htmlCode = `<div style="text-align: center;color: gold; ><label id="voiceMessage" class="prize-shine">${user_llm_msg.userMsg}</label></div>`;
+          let htmlCode = `<div>${user_llm_msg.userMsg}</div>`;
           document.querySelector("#voiceMessage").innerHTML = htmlCode;
           if (user_llm_msg.llmAns === 'lottery'){
             const lotteryButton = document.getElementById('lottery');
