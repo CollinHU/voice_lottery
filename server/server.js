@@ -255,51 +255,6 @@ function getLeftUsers() {
 
 loadData();
 
-const transformVoice =async (clientId,audioStreams,inputFile,outputFile) => {
- // 关闭音频文件写入流
- const stream = audioStreams.get(clientId);
- if (stream) {
-   stream.end();
-   audioStreams.delete(clientId);
- try{
-
-   // 调用转换函数
-   await convertWebmTo16kPcmWav(inputFile, outputFile);
-
-   } catch (error) {
-     console.error('错误:', error);
-   }
-   let audioStream = fs.createReadStream(path.join(__dirname, 'audio', `${clientId}.wav`), {
-     encoding: "binary",
-     highWaterMark: 1024
-   })
-   let b1 = []
-   audioStream.on("data", (chunk) => {
-     let b = Buffer.from(chunk, "binary")
-     b1.push(b)
-   })
-   audioStream.on("close", async ()=>{
-     try {
-       for (let b of b1) {
-         if (!voiceInstance.st.sendAudio(b)) {
-           throw new Error("send audio failed")
-         }
-         await sleep(20)
-       }
-     } catch(error) {
-       console.log("sendAudio failed:", error)
-     }
-     try {
-       console.log("close...");
-       await voiceInstance.st.close()
-     } catch(error) {
-       console.log("error on close:", error)
-     }
-   })
-   console.log('stop recording');
- }
-}
-
 module.exports = {
   run: function(devPort, noOpen) {
     let openBrowser = true;
@@ -326,8 +281,6 @@ module.exports = {
 
     // 创建 WebSocket 服务器
     const wss = new WebSocket.Server({ server });
-    // 存储每个连接对应的音频文件写入流
-    const audioStreams = new Map();
     
     // WebSocket 连接事件处理
     wss.on('connection', (ws, req) => {
@@ -335,6 +288,7 @@ module.exports = {
       const voiceInstance = new Voice((result)=>{
         (async () => {
           try {
+              console.log("Send to LLM", result);
               // 等待 getChatCompletionAnswer 执行完毕并获取返回的结果
               const llm_ans = await getChatCompletionAnswer(result);
   
@@ -354,16 +308,6 @@ module.exports = {
           }
       })();
       });
-      // 为每个连接创建一个唯一的 ID
-      const clientId = Date.now().toString() + Math.floor(Math.random() * 10000);
-      
-      // 创建音频文件路径
-      const filePath = path.join(__dirname, 'audio', `${clientId}.webm`);
-      if (!fs.existsSync(path.dirname(filePath))) {
-        fs.mkdirSync(path.dirname(filePath), { recursive: true });
-      }
-      const writeStream = fs.createWriteStream(filePath);
-      audioStreams.set(clientId, writeStream);
 
       ws.on('message',async(message) => {
         const stringMessage = message.toString('utf8');
@@ -371,58 +315,25 @@ module.exports = {
         try {
           /////////
           if(stringMessage.length === 9){
-            const inputFile = path.join(__dirname, 'audio', `${clientId}.webm`)
-            const outputFile = path.join(__dirname, 'audio', `${clientId}.wav`);
-           
-            // 关闭音频文件写入流
-            const stream = audioStreams.get(clientId);
-            if (stream) {
-              stream.end();
-              audioStreams.delete(clientId);
-            try{
-              // 调用转换函数
-              await convertWebmTo16kPcmWav(inputFile, outputFile);
-
-              } catch (error) {
-                console.error('错误:', error);
-              }
-              let audioStream = fs.createReadStream(path.join(__dirname, 'audio', `${clientId}.wav`), {
-                encoding: "binary",
-                highWaterMark: 1024
-              })
-              let b1 = []
-              audioStream.on("data", (chunk) => {
-                let b = Buffer.from(chunk, "binary")
-                b1.push(b)
-              })
-              audioStream.on("close", async ()=>{
-                try {
-                  for (let b of b1) {
-                    if (!voiceInstance.st.sendAudio(b)) {
-                      throw new Error("send audio failed")
-                    }
-                    //await sleep(20)
-                  }
-                } catch(error) {
-                  console.log("sendAudio failed:", error)
-                }
-                try {
-                  console.log("close...");
-                  await voiceInstance.st.close()
-                } catch(error) {
-                  console.log("error on close:", error)
-                }
-              })
-              console.log('stop recording');
+            try {
+                console.log("close...");
+                await voiceInstance.st.close()
+              } catch(error) {
+                console.log("error on close:", error)
             }
+            console.log('stop recording');
             return;
           }
           
           if (Buffer.isBuffer(message)) {
             console.log('Received binary mediadata message:', message.length);
             // 写入文件
-            writeStream.write(message);
-            console.log('Written to file');
+            try{
+              console.log('Send to NLS')
+              voiceInstance.st.sendAudio(message);
+            }catch(err){
+              console.error(err)
+            }
           } else{
             console.warn('Received non-binary message:');
           }
@@ -431,9 +342,9 @@ module.exports = {
         }
     });
 
-      ws.on('close', async() => {
+    ws.on('close', async() => {
         console.log('Client disconnected.');
-      });
+    });
     });
   }
 };

@@ -10,6 +10,8 @@ class Voice{
   successCallback;
   isWebSocketReady = false;
   st;
+  sentences='';
+  currentSentence='';
 
   setupEventHandlers=()=> {
     this.st.on("started", msg => {
@@ -19,12 +21,13 @@ class Voice{
   
     this.st.on("changed", msg => {
       const jsonObject = JSON.parse(msg);
+      this.currentSentence=jsonObject.payload.result;
       console.log("Client recv changed:", jsonObject.payload.result);
     });
   
     this.st.on("completed", msg => {
-      const jsonObject = JSON.parse(msg);
       console.log("Client recv completed:", msg);
+      this.successCallback && this.successCallback(this.sentences);
     });
   
     this.st.on("closed", () => {
@@ -37,7 +40,9 @@ class Voice{
     this.st.on("end", msg => {
       const jsonObject = JSON.parse(msg);
       console.log("Client recv end:",jsonObject.payload.result);
-      this.successCallback && this.successCallback(jsonObject.payload.result);
+      this.currentSentence=jsonObject.payload.result;
+      this.sentences = this.sentences + this.currentSentence;
+      this.currentSentence ='';
     });
   }
   

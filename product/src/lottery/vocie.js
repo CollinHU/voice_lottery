@@ -1,12 +1,13 @@
 "use strict";
-
+import getWaveBlob from "./wavBlobUtil";
 let mediaRecorder;
 let socket;
+
+const sleep = (waitTimeInMs) => new Promise(resolve => setTimeout(resolve, waitTimeInMs));
 
 export async function startSpeechRecognition() {
   if(mediaRecorder){
     console.log('mediaRecorder.stop');
-    socket.send('transform');
     mediaRecorder.stop();
     return;
   }
@@ -36,27 +37,51 @@ export async function startSpeechRecognition() {
 
       let audioChunks = [];
 
+      const contextOptions = {
+        channelCount: 1,  // 优化交互性能
+        sampleRate: 16000          // 设置采样率为 16 kHz
+      };
+
       // 监听错误事件
       mediaRecorder.onerror = (event) => {
         console.error('MediaRecorder error:', event);
       };
 
       mediaRecorder.ondataavailable = event => {
-          console.log('Data available event triggered');
+          //console.log('Data available event triggered');
           if (event.data.size > 0) {
               audioChunks.push(event.data);
-              // 将 Blob 转换为 ArrayBuffer 并发送给 WebSocket
-              event.data.arrayBuffer().then(buffer=>{
-                socket.send(buffer);
-
-            }).catch(error => {
-                console.error('Error converting Blob to ArrayBuffer:', error);
-            });
           }
       };
 
       mediaRecorder.onstop = () => {
           console.log('Recording stopped');
+          getWaveBlob(audioChunks, false, contextOptions)
+                .then(blob => {
+                  // 将 Blob 转换为 ArrayBuffer
+                  return new Response(blob).arrayBuffer();
+                })
+                .then(async arrayBuffer => {
+                  // 发送 ArrayBuffer 通过 WebSocket
+                  console.log("Start Sending audio chunk to backend");
+                  let offset = 0;
+                  let chunkSize = 7680;
+                  while (offset < arrayBuffer.byteLength) {
+                    const chunk = arrayBuffer.slice(offset, Math.min(offset + chunkSize, arrayBuffer.byteLength));
+                    
+                    socket.send(chunk);
+                
+                    offset += chunkSize;
+                
+                    // 添加延迟
+                    await sleep(10);
+                  }
+                  console.log("Finish sending audio chunk to backend");
+                  socket.send('transform');                
+                })
+                .catch(error => {
+                  console.error('Error converting Blob to ArrayBuffer or sending:', error);
+                });
       };
 
       // 设置WebSocket事件监听器
