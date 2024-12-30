@@ -1,10 +1,33 @@
 const path = require("path");
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 
-const Nls = require("alibabacloud-nls")
+const Nls = require("alibabacloud-nls");
+const { error } = require("console");
 const URL = "wss://nls-gateway.cn-shanghai.aliyuncs.com/ws/v1";
-const APPKEY = process.env.voiceRegApp;//"0aVdQSy3N7P0GSUI"; //获取Appkey请前往控制台：https://nls-portal.console.aliyun.com/applist
-const TOKEN = process.env.voiceRegToken;//"212f11950ea04b108e9f7bd1a3e427df";   //获取Token具体操作，请参见：https://help.aliyun.com/document_detail/450514.html
+const APPKEY = process.env.voiceRegApp; //获取Appkey请前往控制台：https://nls-portal.console.aliyun.com/applist
+
+var RPCClient = require('@alicloud/pop-core').RPCClient;
+
+var client = new RPCClient({
+  accessKeyId: process.env.ALIYUN_AK_ID,
+  accessKeySecret: process.env.ALIYUN_AK_SECRET,
+  endpoint: 'http://nls-meta.cn-shanghai.aliyuncs.com',
+  apiVersion: '2019-02-28'
+});
+
+// => returns Promise
+// => request(Action, params, options)
+let TOKEN = '';
+client.request('CreateToken').then((result) => {
+    TOKEN = process.env.voiceRegToken;
+    console.log("tokenId = " + result.Token.Id)
+    console.log("expireTime = " + result.Token.ExpireTime)
+}).catch(error => {
+  console.error('Error in retrieving Voice Recg Token', error);
+});
+
+
+//const TOKEN = process.env.voiceRegToken;   //获取Token具体操作，请参见：https://help.aliyun.com/document_detail/450514.html
 
 class Voice{
   successCallback;

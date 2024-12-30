@@ -7,7 +7,7 @@ const OpenAI = require( "openai");
 const openai = new OpenAI(
     {
         // 若没有配置环境变量，请用百炼API Key将下行替换为：apiKey: "sk-xxx",
-        apiKey: process.env.qwenApiKey,//"sk-941ff3a72d354e9e9e4ff53bf43f3138",
+        apiKey: process.env.qwenApiKey,
         baseURL: "https://dashscope.aliyuncs.com/compatible-mode/v1"
     }
 );
