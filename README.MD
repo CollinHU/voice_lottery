@@ -37,12 +37,17 @@ Web Page: Three.js, References to the official 3D example of `Three.js`
 
 ![end.jpg](https://raw.githubusercontent.com/moshang-xc/blog/master/share/end.jpg)
 
-## Get AI Token
-参考 /server/.env.example 
+## Get AI Token and Prepare company logo
+Referto /server/.env.example 
 ```
+#Token
 cd /lottery/server
 mv .env.example .env
-//apply for token from AliCloud service
+#apply for token from AliCloud service
+
+#Replace company logo
+cd ../product/src/img
+#put the logo.png here
 ```
 
 ## Install

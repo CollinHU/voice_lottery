@@ -6,9 +6,8 @@ const cfg = require("./config");
 const fs = require('fs');
 const WebSocket = require('ws');
 const Voice = require('./voice');
-const { convertWebmTo16kPcmWav } = require('./convertwebm'); // 导入转换函数
+
 const getChatCompletionAnswer = require('./qwen');
-const sleep = (waitTimeInMs) => new Promise(resolve => setTimeout(resolve, waitTimeInMs));
 
 const {
   loadXML,

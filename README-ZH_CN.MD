@@ -34,12 +34,16 @@ This repo is forked from https://github.com/moshang-ax/lottery/tree/master
 
 ![end.jpg](https://raw.githubusercontent.com/moshang-xc/blog/master/share/end.jpg)
 
-## 获取AI Token
-参考 /server/.env.example 
+## 获取AI Token和替换公司图标
 ```
+#Token
 cd /lottery/server
 mv .env.example .env
-//从阿里云申请相关token
+#apply for token from AliCloud service
+
+#Replace company logo
+cd ../product/src/img
+#put the logo.png here
 ```
 
 ## 安装
