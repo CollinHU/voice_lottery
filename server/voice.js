@@ -19,9 +19,8 @@ var client = new RPCClient({
 // => request(Action, params, options)
 let TOKEN = '';
 client.request('CreateToken').then((result) => {
-    TOKEN = process.env.voiceRegToken;
-    console.log("tokenId = " + result.Token.Id)
-    console.log("expireTime = " + result.Token.ExpireTime)
+    TOKEN = result.Token.Id;
+    console.log("Voice Reg Token expireTime = " + result.Token.ExpireTime);
 }).catch(error => {
   console.error('Error in retrieving Voice Recg Token', error);
 });
