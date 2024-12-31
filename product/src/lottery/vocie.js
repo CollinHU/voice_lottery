@@ -5,6 +5,38 @@ let socket;
 
 const sleep = (waitTimeInMs) => new Promise(resolve => setTimeout(resolve, waitTimeInMs));
 
+let audioChunks = []
+// 定义音频上下文选项
+const audioContextOptions = {
+  channelCount: 1,  // 单声道
+  sampleRate: 16000 // 设置采样率为 16 kHz
+};
+
+async function prepareMediaRecorder() {
+  try {
+    // 请求用户授权麦克风权限并获取音频流
+    const audioConstraints = {
+      audio: audioContextOptions
+    };
+
+    //clean up previous voice buffer
+    audioChunks = [];
+
+    // 获取音频流
+    const audioStream = await navigator.mediaDevices.getUserMedia(audioConstraints);
+    console.log('Audio stream acquired.');
+
+    // 创建一个新的 MediaRecorder 实例
+    const mediaRecorder = new MediaRecorder(audioStream, {
+      mimeType: 'audio/webm;codecs=opus', // 或者其他支持的类型
+    });
+    // 返回 mediaRecorder 对象，以便外部可以控制它（如停止录音）
+    return mediaRecorder;
+  } catch (error) {
+    console.error('Error accessing media devices.', error);
+  }
+}
+
 export async function startSpeechRecognition() {
   if(mediaRecorder){
     console.log('mediaRecorder.stop');
@@ -18,12 +50,14 @@ export async function startSpeechRecognition() {
           return;
       }
 
+      /*const audioContextOptions = {
+        channelCount: 1,  // 声道
+        sampleRate: 16000 // 设置采样率为 16 kHz
+      };
+
       // 请求用户授权麦克风权限并获取音频流
       const audioConstraints = {
-        audio: {
-          sampleRate: 16000, // 设置采样率为16kHz
-          channelCount: 1,   // 单声道
-        }
+        audio: audioContextOptions
       };
 
       const audioStream = await navigator.mediaDevices.getUserMedia(audioConstraints);
@@ -33,14 +67,11 @@ export async function startSpeechRecognition() {
         mimeType: 'audio/webm;codecs=opus', // 或者其他支持的类型
       });
 
+      let audioChunks = [];*/
+      mediaRecorder = await prepareMediaRecorder()
+
+      //start the websocket
       socket = new WebSocket('ws://localhost:8888');
-
-      let audioChunks = [];
-
-      const contextOptions = {
-        channelCount: 1,  // 优化交互性能
-        sampleRate: 16000          // 设置采样率为 16 kHz
-      };
 
       // 监听错误事件
       mediaRecorder.onerror = (event) => {
@@ -56,7 +87,7 @@ export async function startSpeechRecognition() {
 
       mediaRecorder.onstop = () => {
           console.log('Recording stopped');
-          getWaveBlob(audioChunks, false, contextOptions)
+          getWaveBlob(audioChunks, false, audioContextOptions)
                 .then(blob => {
                   // 将 Blob 转换为 ArrayBuffer
                   return new Response(blob).arrayBuffer();
@@ -68,11 +99,8 @@ export async function startSpeechRecognition() {
                   let chunkSize = 7680;
                   while (offset < arrayBuffer.byteLength) {
                     const chunk = arrayBuffer.slice(offset, Math.min(offset + chunkSize, arrayBuffer.byteLength));
-                    
                     socket.send(chunk);
-                
                     offset += chunkSize;
-                
                     // 添加延迟
                     await sleep(10);
                   }
