@@ -49,7 +49,7 @@ class Voice{
   
     this.st.on("completed", msg => {
       console.log("Client recv completed:", msg);
-      this.successCallback && this.successCallback(this.sentences);
+      //this.successCallback && this.successCallback(this.sentences);
     });
   
     this.st.on("closed", () => {
@@ -64,6 +64,7 @@ class Voice{
       console.log("Client recv end:",jsonObject.payload.result);
       this.currentSentence=jsonObject.payload.result;
       this.sentences = this.sentences + this.currentSentence;
+      this.successCallback && this.successCallback(this.currentSentence);
       this.currentSentence ='';
     });
   }

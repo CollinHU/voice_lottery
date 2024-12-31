@@ -287,10 +287,10 @@ module.exports = {
       const voiceInstance = new Voice((result)=>{
         (async () => {
           try {
-              console.log("Send to LLM", result);
               // 等待 getChatCompletionAnswer 执行完毕并获取返回的结果
               let llm_ans =  ''
               if(result !== ''){
+                console.log("Send to LLM", result);
                 llm_ans = await getChatCompletionAnswer(result);
               }
   
@@ -313,7 +313,7 @@ module.exports = {
 
       ws.on('message',async(message) => {
         const stringMessage = message.toString('utf8');
-
+        //console.log(stringMessage);
         try {
           /////////
           if(stringMessage.length === 9){
