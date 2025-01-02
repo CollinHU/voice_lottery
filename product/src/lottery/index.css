@@ -99,8 +99,8 @@ a {
   color: rgba(127, 255, 255, 0.75);
 }
 .company-logo {
-  width: 15vw; /* 调整为更小的宽度 */
-  height: auto; /* 保持图片宽高比 */
+  width: auto; /* 调整为更小的宽度 */
+  height: 8vh; /* 保持图片宽高比 */
   margin-right: 4px; /* 减少间距以适应较小的图片 */
   vertical-align: middle; /* 使图片与文本垂直居中对齐 */
 }

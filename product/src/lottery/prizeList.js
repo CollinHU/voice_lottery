@@ -163,6 +163,7 @@ function showPrizeList(currentPrizeIndex) {
     <div class="prize-container">
         <!-- 插入图片 -->
          <img src="../img/logo.png" alt="奖品图标" class="company-logo" />
+         <img src="../img/ADA.png" alt="奖品图标" class="company-logo" />
         
         <!-- 正在抽取的文本 -->
         <div class="prize-text">

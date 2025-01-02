@@ -15,24 +15,31 @@ const prizes = [
   },
   {
     type: 1,
-    count: 5,
+    count: 1,
     text: "一等奖",
-    title: "Mac Pro",
-    img: "../img/mbp.jpg"
+    title: "AirePods 4",
+    img: "../img/AirPods4.jpg"
   },
   {
     type: 2,
-    count: 6,
+    count: 3,
     text: "二等奖",
-    title: "华为 Mate30",
-    img: "../img/huawei.png"
+    title: "JD ¥500 Voucher",
+    img: "../img/JdVoucher.jpg"
   },
   {
     type: 3,
-    count: 7,
-    text: "三等奖",
-    title: "Ipad Mini5",
-    img: "../img/ipad.jpg"
+    count: 3,
+    text: "三等奖A",
+    title: "SONY SRS-XB100 Sound Box",
+    img: "../img/SonySoundBox.jpg"
+  },
+  {
+    type: 4,
+    count: 3,
+    text: "三等奖B",
+    title: "Razer Mouse V3",
+    img: "../img/razerMouse.jpg"
   },
   /*{
     type: 5,
@@ -60,7 +67,7 @@ const prizes = [
 /**
  * 一次抽取的奖品个数与prizes对应
  */
-const EACH_COUNT = [0, 5, 6, 7];
+const EACH_COUNT = [0, 1, 3, 3, 3];
 
 /**
  * 卡片公司名称标识
