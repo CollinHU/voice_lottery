@@ -1,25 +1,35 @@
 (function () {
-  //based on an Example by @curran
   window.requestAnimFrame = (function () {
     return window.requestAnimationFrame;
   })();
+  
   var canvas = document.getElementById("canvas");
+  var c = canvas.getContext("2d");
 
-  ~~(function setSize() {
-    //定义canvas的宽高，让他跟浏览器的窗口的宽高相同
-    window.onresize = arguments.callee;
-    w = window.innerWidth;
-    h = window.innerHeight;
+  // 定义并加载背景图片
+  var backgroundImage = new Image();
+  backgroundImage.src = '../img/background.png'; // 替换为你的背景图片路径
+  
+  // 确保图像加载完毕再开始动画
+  backgroundImage.onload = function() {
+    initializeCanvas();
+    executeFrame();
+  };
+
+  function setSize() {
+    window.onresize = setSize;
+    var w = window.innerWidth;
+    var h = window.innerHeight;
     canvas.width = w;
     canvas.height = h;
-  })();
+  }
 
-  var c = canvas.getContext("2d");
+  setSize(); // 初始设置尺寸
 
   var numStars = 800;
   var radius = "0." + Math.floor(Math.random() * 9) + 1;
   var focalLength = canvas.width * 2;
-  var warp = 0;
+  var warp = 1;
   var centerX, centerY;
 
   var stars = [],
@@ -28,12 +38,9 @@
 
   var animate = true;
 
-  initializeStars();
-
-  function executeFrame() {
-    if (animate) requestAnimFrame(executeFrame);
-    moveStars();
-    drawStars();
+  function initializeCanvas() {
+    setSize();
+    initializeStars();
   }
 
   function initializeStars() {
@@ -69,16 +76,22 @@
     // Resize to the screen
     if (
       canvas.width != window.innerWidth ||
-      canvas.width != window.innerWidth
+      canvas.height != window.innerHeight
     ) {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      initializeStars();
+      initializeCanvas();
     }
+    
+    // 创建背景图像的重复图案
+    var pattern = c.createPattern(backgroundImage, 'repeat');
+    c.fillStyle = pattern;
+    c.fillRect(0, 0, canvas.width, canvas.height);
+
+    // 如果warp为0，则不绘制黑色矩形覆盖背景图
     if (warp == 0) {
       c.fillStyle = "rgba(0,10,20,1)";
       c.fillRect(0, 0, canvas.width, canvas.height);
     }
+
     c.fillStyle = "rgba(209, 255, 255, " + radius + ")";
     for (i = 0; i < numStars; i++) {
       star = stars[i];
@@ -91,16 +104,13 @@
 
       c.fillRect(pixelX, pixelY, pixelRadius, pixelRadius);
       c.fillStyle = "rgba(209, 255, 255, " + star.o + ")";
-      //c.fill();
     }
   }
 
-  // document.getElementById('warp').addEventListener("click", function(e) {
-  //     window.c.beginPath();
-  //     window.c.clearRect(0, 0, window.canvas.width, window.canvas.height);
-  //     window.warp = warp ? 0 : 1;
-  //     executeFrame();
-  // });
+  function executeFrame() {
+    if (animate) requestAnimFrame(executeFrame);
+    moveStars();
+    drawStars();
+  }
 
-  executeFrame();
 })();

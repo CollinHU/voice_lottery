@@ -58,7 +58,7 @@ a {
 .element {
   width: 12vh;
   height: 16vh;
-  box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+  box-shadow: 0 0 12px rgba(73, 32, 74, 0.5);
   border: 1px solid rgba(127, 255, 255, 0.25);
   text-align: center;
   cursor: default;
@@ -96,7 +96,7 @@ a {
   left: 0;
   right: 0;
   font-size: 1.6vh;
-  color: rgba(127, 255, 255, 0.75);
+  color: rgba(245, 242,233, 0.75);
 }
 .company-logo {
   width: auto; /* 调整为更小的宽度 */
@@ -127,8 +127,8 @@ button:active {
 }
 
 .highlight {
-  background-color: rgba(253, 0, 0, 0.95) !important;
-  box-shadow: 0 0 12px rgba(253, 105, 0, 0.95);
+  background-color: rgba(211, 161, 48, 0.9) !important;
+  box-shadow: 0 0 12px rgba(211, 161, 48, 0.7);
   border: 1px solid rgba(253, 105, 0, 0.25);
 }
 
@@ -142,7 +142,7 @@ button:active {
 
 .prize.element {
   transition: background-color 1.5s ease-in 0.3s;
-  background-color: rgba(253, 0, 0, 0.95) !important;
+  background-color: rgba(211, 161, 48, 0.95) !important;
   box-shadow: 0 0 12px rgba(253, 105, 0, 0.95);
 }
 
@@ -152,7 +152,7 @@ button:active {
 .highlight .company,
 .highlight .name,
 .highlight .details {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .voice-reg-img{
@@ -214,9 +214,9 @@ button:active {
   justify-content: center;
   border-radius: 4px;
   flex-wrap: nowrap;
-  background-color: rgba(0, 127, 127, 0.37);
-  border: 1px solid rgba(127, 255, 255, 0.25);
-  color: rgba(127, 255, 255, 0.75);
+  background-color: rgba(211, 161, 48, 0.37);
+  border: 1px solid rgba(211, 161, 48, 0.7);
+  color: rgba(255, 255, 255, 0.75);
   width: 30vh;
   height: 10vh;
   box-sizing: border-box;
@@ -268,7 +268,7 @@ button:active {
   border-radius: 1.8vh;
   position: relative;
   animation: animate-positive 2s;
-  background-color: #d9534f;
+  background-color: #438773;
   height: 1.8vh;
   -webkit-transition: width 0.6s ease;
   -o-transition: width 0.6s ease;
@@ -395,7 +395,7 @@ button:active {
   left: 0;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #03e9f4);
+  background: linear-gradient(90deg, transparent, #e6dcc7);
   animation: animate1 1s linear infinite
 }
 
@@ -415,7 +415,7 @@ button:active {
   right: 0;
   width: 2px;
   height: 100%;
-  background: linear-gradient(180deg, transparent, #03e9f4);
+  background: linear-gradient(180deg, transparent, #e6dcc7);
   animation: animate2 1s linear infinite;
   animation-delay: .25s
 }
@@ -436,7 +436,7 @@ button:active {
   right: 0;
   width: 100%;
   height: 2px;
-  background: linear-gradient(270deg, transparent, #03e9f4);
+  background: linear-gradient(270deg, transparent, #e6dcc7);
   animation: animate3 1s linear infinite;
   animation-delay: .50s
 }
@@ -457,7 +457,7 @@ button:active {
   left: 0;
   width: 2px;
   height: 100%;
-  background: linear-gradient(360deg, transparent, #03e9f4);
+  background: linear-gradient(360deg, transparent, #e6dcc7);
   animation: animate4 1s linear infinite;
   animation-delay: .75s
 }
@@ -489,7 +489,7 @@ button:active {
 .prize-shine {
   font-size: 3vh;
   font-weight: bold;
-  color: #db5c58;
+  color: rgba(245,242,233, 0.95);
   vertical-align: middle;
   padding: 0 6px;
 }
@@ -572,7 +572,7 @@ button:active {
 
 #lottery {
   animation: breath 1.6s linear infinite;
-  box-shadow: 0px 0px 15px rgb(127 255 255 / 75%);
+  box-shadow: 0px 0px 15px rgb(255 233 179 / 75%);
 }
 
 @keyframes breath {

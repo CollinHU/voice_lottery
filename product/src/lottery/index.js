@@ -352,7 +352,7 @@ function createCard(user, isBold, id, showTable) {
   } else {
     element.className = "element";
     element.style.backgroundColor =
-      "rgba(0,127,127," + (Math.random() * 0.7 + 0.25) + ")";
+      "rgba(67, 135, 115," + (Math.random() * 0.25 + 0.75) + ")";
   }
   //添加公司标识
   element.appendChild(createElement("company", COMPANY));
@@ -706,12 +706,29 @@ function changePrize() {
   setPrizeData(currentPrizeIndex, luckyCount);
 }
 
+function createSeededRandom(seed) {
+  // 确保种子是非负整数
+  seed = Math.abs(parseInt(seed)) || 1;
+
+  // 初始化 x 使用种子，确保它是一个非负整数
+  let x = seed % 233280;
+
+  return function() {
+      // 线性同余公式
+      x = (x * 9301 + 49297) % 233280;
+      // 返回 [0, 1) 区间内的浮点数
+      return x / 233280;
+  }
+}
 /**
  * 随机抽奖
  */
 function random(num) {
   // Math.floor取到0-num-1之间数字的概率是相等的
-  return Math.floor(Math.random() * num);
+  // 使用当前时间戳作为种子
+  const seed = new Date().getTime();
+  const seededRandom = createSeededRandom(seed);
+  return Math.floor(seededRandom() * num);
 }
 
 /**
@@ -731,7 +748,7 @@ function changeCard(cardIndex, user) {
 function shine(cardIndex, color) {
   let card = threeDCards[cardIndex].element;
   card.style.backgroundColor =
-    color || "rgba(0,127,127," + (Math.random() * 0.7 + 0.25) + ")";
+    color || "rgba(67, 135, 115," + (Math.random() * 0.05 + 0.95) + ")";
 }
 
 /**
