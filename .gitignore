@@ -13,6 +13,4 @@ error.json
 **/.env
 **/.vscode
 **/cache
-**/logo.png
-**/ADA.png
 **/users_real.xlsx
