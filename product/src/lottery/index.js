@@ -352,7 +352,7 @@ function createCard(user, isBold, id, showTable) {
   } else {
     element.className = "element";
     element.style.backgroundColor =
-      "rgba(67, 135, 115," + (Math.random() * 0.25 + 0.75) + ")";
+      "rgba(0, 52, 69," + (Math.random() * 0.5 + 0.5) + ")";
   }
   //添加公司标识
   element.appendChild(createElement("company", COMPANY));
@@ -731,6 +731,11 @@ function random(num) {
   return Math.floor(seededRandom() * num);
 }
 
+function cardRandom(num) {
+  // Math.floor取到0-num-1之间数字的概率是相等的
+  return Math.floor(Math.random() * num);
+}
+
 /**
  * 切换名牌人员信息
  */
@@ -748,7 +753,7 @@ function changeCard(cardIndex, user) {
 function shine(cardIndex, color) {
   let card = threeDCards[cardIndex].element;
   card.style.backgroundColor =
-    color || "rgba(67, 135, 115," + (Math.random() * 0.05 + 0.95) + ")";
+    color || "rgba(0, 52, 69," + (Math.random() * 0.5 + 0.5) + ")";
 }
 
 /**
@@ -757,7 +762,7 @@ function shine(cardIndex, color) {
 function shineCard() {
   let maxCard = 10,
     maxUser;
-  let shineCard = 10 + random(maxCard);
+  let shineCard = 10 + cardRandom(maxCard);
 
   setInterval(() => {
     // 正在抽奖停止闪烁
@@ -766,8 +771,8 @@ function shineCard() {
     }
     maxUser = basicData.leftUsers.length;
     for (let i = 0; i < shineCard; i++) {
-      let index = random(maxUser),
-        cardIndex = random(TOTAL_CARDS);
+      let index = cardRandom(maxUser),
+        cardIndex = cardRandom(TOTAL_CARDS);
       // 当前显示的已抽中名单不进行随机切换
       if (selectedCardIndex.includes(cardIndex)) {
         continue;

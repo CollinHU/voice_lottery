@@ -66,7 +66,7 @@ a {
 }
 
 .element:hover {
-  box-shadow: 0 0 12px rgba(0, 255, 255, 0.75);
+  box-shadow: 0 0 12px rgba(245, 242,233, 0.75);
   border: 1px solid rgba(127, 255, 255, 0.75);
 }
 
@@ -76,7 +76,7 @@ a {
   right: 0;
   width: 100%;
   font-size: 1.5vh;
-  color: rgba(127, 255, 255, 0.75);
+  color: rgba(211, 161, 48, 0.75);
 }
 
 .element .name {
@@ -86,8 +86,8 @@ a {
   right: 0;
   font-size: 2vh;
   font-weight: bold;
-  color: rgba(255, 255, 255, 0.75);
-  text-shadow: 0 0 1vh rgba(0, 255, 255, 0.95);
+  color: rgba(211, 161, 48, 0.75);
+  text-shadow: 0 0 1vh rgba(211, 161, 48, 0.5);
 }
 
 .element .details {
@@ -96,7 +96,7 @@ a {
   left: 0;
   right: 0;
   font-size: 1.6vh;
-  color: rgba(245, 242,233, 0.75);
+  color: rgba(211, 161, 48, 0.95);
 }
 .company-logo {
   width: auto; /* 调整为更小的宽度 */
@@ -127,13 +127,13 @@ button:active {
 }
 
 .highlight {
-  background-color: rgba(211, 161, 48, 0.9) !important;
+  background-color: rgba(211, 161, 48, 0.95) !important;
   box-shadow: 0 0 12px rgba(211, 161, 48, 0.7);
   border: 1px solid rgba(253, 105, 0, 0.25);
 }
 
 .highlight.element .name {
-  text-shadow: 0 0 16px rgba(255, 255, 255, 0.95);
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.75);
 }
 
 .prize.element .name {
@@ -152,7 +152,7 @@ button:active {
 .highlight .company,
 .highlight .name,
 .highlight .details {
-  color: rgba(255, 255, 255, 0.95);
+  color: rgba(0, 52, 69, 0.95);
 }
 
 .voice-reg-img{
@@ -268,7 +268,7 @@ button:active {
   border-radius: 1.8vh;
   position: relative;
   animation: animate-positive 2s;
-  background-color: #438773;
+  background-color: #003460;
   height: 1.8vh;
   -webkit-transition: width 0.6s ease;
   -o-transition: width 0.6s ease;
@@ -362,7 +362,7 @@ button:active {
 }
 
 .shine {
-  box-shadow: 0 0 15px 0 rgba(0, 255, 255, 0.5);
+  box-shadow: 0 0 15px 0 rgba(0, 52, 69, 0.5);
   transform: scale(1.2);
   transform-origin: left center;
   position: relative;
@@ -511,7 +511,7 @@ button:active {
   box-sizing: border-box;
   font-size: 14px;
   background-color: rgba(127, 255, 255, 0.25);
-  color: rgba(127, 255, 255, 0.75);
+  color: rgba(0, 52, 69, 0.75);
 }
 
 .music {
@@ -535,7 +535,6 @@ button:active {
   font-size: 1.4vh;
   color: #fff;
   cursor: pointer;
-  background-color: rgba(253, 0, 0, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
