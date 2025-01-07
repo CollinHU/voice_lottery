@@ -626,7 +626,7 @@ function lottery() {
   //   btns.lottery.innerHTML = "开始抽奖";
   //   return;
   // }
-  btns.lottery.innerHTML = "结束抽奖";
+  //btns.lottery.innerHTML = "结束抽奖";
   rotateBall().then(() => {
     // 将之前的记录置空
     currentLuckys = [];
