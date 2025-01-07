@@ -11,7 +11,7 @@ import {
 import { NUMBER_MATRIX } from "./config.js";
 import {startSpeechRecognition } from './vocie.js';
 
-const ROTATE_TIME = 3000;
+const ROTATE_TIME = 30000;
 const ROTATE_LOOP = 1000;
 const BASE_HEIGHT = 1080;
 
@@ -187,7 +187,7 @@ function initCards() {
   //
 
   controls = new THREE.TrackballControls(camera, renderer.domElement);
-  controls.rotateSpeed = 0.5;
+  controls.rotateSpeed = 0.001;
   controls.minDistance = 500;
   controls.maxDistance = 6000;
   controls.addEventListener("change", render);

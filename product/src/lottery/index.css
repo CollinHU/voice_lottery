@@ -71,6 +71,7 @@ a {
 }
 
 .element .company {
+  visibility: hidden;
   position: absolute;
   top: 1.2vh;
   right: 0;
@@ -81,16 +82,17 @@ a {
 
 .element .name {
   position: absolute;
-  top: 4.2vh;
+  top: 2.2vh;
   left: 0;
   right: 0;
-  font-size: 2vh;
+  font-size: 3vh;
   font-weight: bold;
   color: rgba(211, 161, 48, 0.75);
   text-shadow: 0 0 1vh rgba(211, 161, 48, 0.5);
 }
 
 .element .details {
+  visibility: hidden;
   position: absolute;
   bottom: 1.2vh;
   left: 0;
