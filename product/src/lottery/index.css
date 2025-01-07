@@ -371,6 +371,11 @@ button:active {
   overflow: hidden;
 }
 
+.blurred{
+  filter: blur(3px); 
+  opacity: 0.1; 
+}
+
 .done {
   position: relative;
 }

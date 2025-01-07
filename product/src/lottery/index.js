@@ -642,7 +642,7 @@ function lottery() {
       basicData.leftUsers = basicData.users.slice();
       leftCount = basicData.leftUsers.length;
     }
-    console.log(leftPrizeCount)
+    //console.log(leftPrizeCount)
     for (let i = 0; i < perCount; i++) {
         if (leftPrizeCount === 0) {
           break;

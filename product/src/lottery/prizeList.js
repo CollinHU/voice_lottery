@@ -167,9 +167,9 @@ function showPrizeList(currentPrizeIndex) {
         
         <!-- 正在抽取的文本 -->
         <div class="prize-text">
-            正在抽取
-            <label id="prizeType" class="prize-shine">${currentPrize.text}</label>
-            <label id="prizeText" class="prize-shine">${currentPrize.title}</label>
+            <label id="prizePrefix"></label>
+            <label id="prizeType" class="prize-shine"></label>
+            <label id="prizeText" class="prize-shine"></label>
         </div>
     </div>
     <span style="display: none;">
@@ -183,7 +183,7 @@ function showPrizeList(currentPrizeIndex) {
     if (item.type === defaultType) {
       return true;
     }
-    htmlCode += `<li id="prize-item-${item.type}" class="prize-item ${
+    htmlCode += `<li id="prize-item-${item.type}" class="prize-item blurred ${
       item.type == currentPrize.type ? "shine" : ""
     }">
                         <span></span><span></span><span></span><span></span>
@@ -219,6 +219,7 @@ function resetPrize(currentPrizeIndex) {
   prizeElement = {};
   lasetPrizeIndex = currentPrizeIndex;
   showPrizeList(currentPrizeIndex);
+  setPrizeData(currentPrizeIndex, 0, true);
 }
 
 let setPrizeData = (function () {
@@ -239,6 +240,7 @@ let setPrizeData = (function () {
 
     if (!prizeElement.prizeType) {
       //console.log(prizeElement);
+      prizeElement.prizePrefix = document.querySelector("#prizePrefix")
       prizeElement.prizeType = document.querySelector("#prizeType");
       prizeElement.prizeLeft = document.querySelector("#prizeLeft");
       prizeElement.prizeText = document.querySelector("#prizeText");
@@ -254,14 +256,29 @@ let setPrizeData = (function () {
         document.querySelector(`#prize-count-${type}`).textContent =
           "0" + "/" + prizes[i]["count"];
       }
+      document.querySelector("#menu").addEventListener("click", function (e) {
+        if (e.target.id==='enter'){
+          console.log('init box')
+          elements.box && elements.box.classList.add("shine");
+          elements.box && elements.box.classList.remove('blurred');
+          prizeElement.prizePrefix.textContent = "正在抽取";
+          prizeElement.prizeType.textContent = currentPrize.text;
+          prizeElement.prizeText.textContent = currentPrize.title;
+        }
+
+      });
     }
 
     if (lasetPrizeIndex !== currentPrizeIndex) {
       let lastPrize = prizes[lasetPrizeIndex],
         lastBox = document.querySelector(`#prize-item-${lastPrize.type}`);
       lastBox.classList.remove("shine");
+      lastBox.classList.remove("blurred");
       lastBox.classList.add("done");
+      elements.box && elements.box.classList.remove('blurred');
       elements.box && elements.box.classList.add("shine");
+
+      prizeElement.prizePrefix.textContent = "正在抽取";
       prizeElement.prizeType.textContent = currentPrize.text;
       prizeElement.prizeText.textContent = currentPrize.title;
 
@@ -269,10 +286,15 @@ let setPrizeData = (function () {
     }
 
     if (currentPrizeIndex === 0) {
+      prizeElement.prizePrefix.textContent = "";
       prizeElement.prizeType.textContent = "抽奖结束";
       prizeElement.prizeText.textContent = " ";
       prizeElement.prizeLeft.textContent = "不限制";
       return;
+    }
+    if (count != 0){
+      elements.box && elements.box.classList.remove('blurred');
+      elements.box && elements.box.classList.add("shine");
     }
 
     count = totalCount - count;

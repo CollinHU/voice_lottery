@@ -145,7 +145,7 @@ router.post("/errorData", (req, res, next) => {
 // 保存数据到excel中去
 router.post("/export", (req, res, next) => {
   let type = [1, 2, 3, 4, 5, defaultType],
-    outData = [["工号", "姓名", "部门"]];
+    outData = [["序列号", "姓名", "部门"]];
   cfg.prizes.forEach(item => {
     outData.push([item.text]);
     outData = outData.concat(luckyData[item.type] || []);
